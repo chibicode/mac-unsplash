@@ -6,4 +6,9 @@ LOGDATE=$(date +%Y%m%dT%H%M%S)
 cd ~/Pictures/Unsplash/
 find . -type f -delete
 curl -o "$LOGDATE.png" "https://unsplash.it/2880/1800/?random"
-osascript -e "tell application \"System Events\" to set picture of every desktop to \"~/Pictures/Unsplash/$LOGDATE.png\""
+if [ -f $LOGDATE.png ];
+then
+  osascript -e "tell application \"System Events\" to set picture of every desktop to \"~/Pictures/Unsplash/$LOGDATE.png\""
+else
+  echo "$LOGDATE.png doesn't exist"
+fi
